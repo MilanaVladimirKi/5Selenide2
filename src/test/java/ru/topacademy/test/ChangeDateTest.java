@@ -21,13 +21,13 @@ public class ChangeDateTest {
         $(".checkbox__box").click();
         $(".button").click();
         $("[data-test-id=success-notification] .notification__title").shouldHave(exactText("Успешно!"), Duration.ofSeconds(20));
-        $("[data-test-id=success-notification] .notification__content").shouldHave(exactText("Встреча успешно запланирована на " +), Duration.ofSeconds(20)); // проверить
+        $("[data-test-id=success-notification] .notification__content").shouldHave(exactText("Встреча успешно запланирована на " + planningDate), Duration.ofSeconds(20));
         $(".calendar-input__custom-control input").doubleClick().sendKeys(changeDate);
         $(".button").click();
         $("[data-test-id=replan-notification] .notification__title").shouldHave(exactText("Необходимо подтверждение"));
         $("[data-test-id=replan-notification] button").click();
         $("[data-test-id=success-notification] .notification__title").shouldHave(exactText("Успешно!"), Duration.ofSeconds(40));
-        $("[data-test-id=success-notification] .notification__content").shouldHave(exactText("Встреча успешно запланирована на " +), Duration.ofSeconds(40)); // проверить
+        $("[data-test-id=success-notification] .notification__content").shouldHave(exactText("Встреча успешно запланирована на " + planningDate), Duration.ofSeconds(40));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class ChangeDateTest {
         $("[data-test-id=phone] input").setValue(phone);
         $(".checkbox__box").click();
         $(".button").click();
-        $("[data-test-id=name].input_invalid .input__sub").shouldHave(exactText("Имя и Фамилия указаны неверно. Допустимы только русские буквы."), Duration.ofSeconds(20)); // проверить
+        $("[data-test-id=name].input_invalid .input__sub").shouldHave(exactText("Имя и Фамилия указаны неверно. Допустимы только русские буквы, пробелы и дефисы."), Duration.ofSeconds(20));
     }
 
     @Test
@@ -101,7 +101,7 @@ public class ChangeDateTest {
         $("[data-test-id=phone] input").setValue(+7987654);
         $(".checkbox__box").click();
         $(".button").click();
-        $("[data-test-id=name].input_invalid .input__sub").shouldHave(exactText(""), Duration.ofSeconds(20)); // проверить
+        $("[data-test-id=name].input_invalid .input__sub").shouldHave(exactText("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678"), Duration.ofSeconds(20));
     }
 
     @Test
@@ -121,7 +121,10 @@ public class ChangeDateTest {
         $("[data-test-id=name] input").setValue(name);
         $("[data-test-id=phone] input").setValue(phone);
         $(".button").click();
-        $("[data-test-id=argeement].input_invalid").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих данных"), Duration.ofSeconds(20));
+        $("[data-test-id=argeement].input_invalid").shouldHave(exactText("Я соглашаюсь с условиями обработки и использования моих персональных данных"), Duration.ofSeconds(20));
     }
+
+
+
 
 }
